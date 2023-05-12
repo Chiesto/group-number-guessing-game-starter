@@ -4,7 +4,7 @@ const app = express();
 const PORT = 5000;
 
 
-const randomNumber = Math.floor(Math.random() * 25) + 1;
+const randomNumber = require('./public/randomNumber');
 let winner1 = "";
 let winner2 = "";
 const playerQuotes = [{
@@ -27,7 +27,8 @@ app.post('/history', function(req,res){
 
   history.push(req.body);
   console.log('Received player history on server',history);
-
+  res.send(201);
+  //EVERY get and post needs EXACTLY ONE response.
 })
 //send history to another server side file 'history.js' X
 module.exports = history;

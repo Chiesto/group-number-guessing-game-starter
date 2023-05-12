@@ -33,7 +33,7 @@ Stretch Goals:
 
 The list below is not in any order of priority. Before attempting any of these, commit your working base mode. Make sure each member of your group understands what you completed for base mode! 
 
-- have the random number generator be in its own node module, look back at the Module Madness activity to do this.
+- have the random number generator be in its own node module, look back at the Module Madness activity to do this.X
 - allow for users to generate a new game with a manual min/max random number range
 - disallow two users to submit the same guess at the same time
 - add a bot player that guesses a random number each time in addition to the players (this bot should really talk trash when it beats a bunch of humans)
