@@ -39,13 +39,7 @@ app.get('/history',function(req,res){
   console.log('Player history being sent from server', history);
 })
 
-// app.post('/playerQuotes', function(req,res){
-
-//   history.push(req.body);
-//   console.log('Received player history on server',history);
-
-// })
-
+//updates our player quote values for player 1 and player 2
 function updatePlayerQuotes() {
   playerQuotes[0].player1 = winner1;
   playerQuotes[0].player2 = winner2;

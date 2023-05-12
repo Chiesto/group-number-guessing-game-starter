@@ -6,8 +6,10 @@ function onReady() {
   getHistory();
   getPlayerQuotes();
 }
+
 //add our input to the history array
-function postHistory(){
+function postHistory(event){
+ event.preventDefault();
 
  let playerOne = $('#player-one').val();
  let playerTwo = $('#player-two').val();
@@ -45,6 +47,7 @@ function getHistory(){
   })
 }
 
+//getting player quotes from the server
 function getPlayerQuotes(){
   $.ajax({
     method:'GET',
@@ -57,26 +60,29 @@ function getPlayerQuotes(){
   })
 }
 
+//rendering player quotes to the DOM
 function renderPlayerQuotes(quotes){
   $('#player-quotes').empty();
   let item = quotes[0];
   if(item.player1==="PLAYER 1 WINS!"){
     $('#player-quotes').append(`
-  <div class = "p1-wins"><b> PLAYER ONE WINS!!!!! </b></div> <br> ${item.player2}
+  <div style = "font-size: 36px; font-weight: bold; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow 2s linear infinite;">PLAYER ONE WINS!!!!!</div> <br> ${item.player2}
   `)
   } else if(item.player2==="PLAYER 2 WINS!"){
     $('#player-quotes').append(`
-  <div class = "p2-wins"><b> PLAYER TWO WINS!!!!! </b></div> <br> ${item.player1}
+  <div style = "font-size: 36px; font-weight: bold; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow 2s linear infinite;">PLAYER TWO WINS!!!!!</div> 
+  <br> ${item.player1}
   `)
   } else {
 
   $('#player-quotes').append(`
-  Player 1: ${item.player1}    Player2: ${item.player2}
+  ${item.player1} and ${item.player2}
   `)
   console.log('Rendered player quotes to the DOM');
   }
 }
 
+//render's the player 1 and player 2 guessing history to the DOM
 function renderToDom(array){
   $('#total-guesses').empty();
   for(item of array){
@@ -86,28 +92,4 @@ function renderToDom(array){
   }
 }
 
-
-// function getInput(){
-//   $.ajax({
-//     method:'GET',
-//     url: '/history'
-//   }).then(function(response){
-//     $('#display').append(response);
-//   }).catch(function(error){
-//     alert('problems in our getInput function - error =>', error);
-//   })
-// }
-// let counter = 0;
-// function getHistory(){
-//   counter++;
-  
-//   $.ajax({
-//     method: 'GET',
-//     url: '/history'
-//   }).then(function(response){
-//     $('#total-guesses').append(`
-//     Here are your guesses ${response}. Total number of guesses ${counter}
-//     `)
-//   })
-// }
 
