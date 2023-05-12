@@ -27,6 +27,7 @@ app.post('/history', function(req,res){
 
   history.push(req.body);
   console.log('Received player history on server',history);
+  res.send(201);
 
 })
 //send history to another server side file 'history.js' X
