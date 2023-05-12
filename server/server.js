@@ -3,8 +3,8 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
-
 const randomNumber = require('./public/randomNumber');
+
 let winner1 = "";
 let winner2 = "";
 const playerQuotes = [{
@@ -29,9 +29,7 @@ app.post('/history', function(req,res){
   console.log('Received player history on server',history);
   res.send(201);
   //EVERY get and post needs EXACTLY ONE response.
-})
-//send history to another server side file 'history.js' X
-module.exports = history;
+});
 
 //sending the full UPDATED history of all inputs X
 app.get('/history',function(req,res){
@@ -49,23 +47,26 @@ function updatePlayerQuotes() {
 //sending the quotes (if player's guess was too high, too low, or right on) to the client
 app.get('/playerQuotes', function(req, res){
   console.log('/playerQuotes req was made');
-
+  
+  let min = history[0].first;
+  let max = history[0].second;
+  const generatedNum = randomNumber(min, max);
 
   let item = history[history.length-1];
   console.log('here is our item', item);
-    if (Number(item.p1)===randomNumber){
+    if (Number(item.p1)===generatedNum){
         winner1 = "PLAYER 1 WINS!";
-    } else if (Number(item.p1)>randomNumber){
+    } else if (Number(item.p1)>generatedNum){
         winner1 = "Player 1 guessed too high";
-    } else if(item.p1<randomNumber){
+    } else if(item.p1<generatedNum){
         winner1 = "Player 1 guessed too low";
     } 
 
-    if (Number(item.p2)===randomNumber){
+    if (Number(item.p2)===generatedNum){
         winner2 = "PLAYER 2 WINS!";
-    } else if (Number(item.p2)>randomNumber){
+    } else if (Number(item.p2)>generatedNum){
         winner2 = "Player 2 guessed too high";
-    } else if(Number(item.p2)<randomNumber){
+    } else if(Number(item.p2)<generatedNum){
         winner2 = "Player 2 guessed too low";
     } 
     updatePlayerQuotes();
@@ -75,8 +76,9 @@ app.get('/playerQuotes', function(req, res){
   console.log('Player quotes', playerQuotes);
 })
 
+
 app.listen(PORT, () => {
-  console.log ('Server is running on port', PORT)
+  console.log ('Server is running on port', PORT);
 })
 
 

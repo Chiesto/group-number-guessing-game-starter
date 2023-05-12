@@ -3,8 +3,6 @@ $(document).ready(onReady);
 function onReady() {
   console.log("jquery is loaded!");
   $('#form').on('submit', postHistory);
-  getHistory();
-  getPlayerQuotes();
 }
 
 //add our input to the history array
@@ -14,6 +12,11 @@ function postHistory(event){
  let playerOne = $('#player-one').val();
  let playerTwo = $('#player-two').val();
 
+ let firstNumber = $('#firstNumber').val();
+  let secondNumber = $('#secondNumber').val();
+  $('#firstNumber').val('');
+  $('#secondNumber').val('');
+
  $('#player-one').val('');
  $('#player-two').val('');
 
@@ -22,7 +25,9 @@ function postHistory(event){
     url: '/history',
     data:{
       p1:playerOne,
-      p2:playerTwo
+      p2:playerTwo,
+      first:firstNumber,
+      second:secondNumber
     }
   }).then(function(response){
     console.log('postHistory function works!');
@@ -91,5 +96,3 @@ function renderToDom(array){
     `)
   }
 }
-
-
